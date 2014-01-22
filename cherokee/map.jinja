@@ -1,0 +1,24 @@
+{% set cherokee = salt['grains.filter_by']({
+  'Debian': {
+    'user': 'www-data',
+    'group': 'www-data',
+    'panic_action': '/usr/share/cherokee/cherokee-panic',
+    'default_document_root': '/var/www',
+    'logger_access_filename': '/var/log/cherokee/cherokee.access',
+    'error_writter_filename': '/var/log/cherokee/cherokee.error',
+    'icons_dir': '/icons',
+    'icons_dir_path': '/usr/share/cherokee/icons',
+    'pkg_openssl_dev': 'libssl-dev'
+  },
+  'RedHat': {
+    'user': 'cherokee',
+    'group': 'cherokee',
+    'panic_action': '/usr/bin/cherokee-panic',
+    'default_document_root': '/var/www',
+    'logger_access_filename': '/var/log/cherokee/access_log',
+    'error_writter_filename': '/var/log/cherokee/error_log',
+    'icons_dir': '/cherokee_icons',
+    'icons_dir_path': '/usr/share/cherokee/icons',
+    'pkg_openssl_dev': 'openssl-dev'
+  },
+}, merge=salt['pillar.get']('cherokee:lookup')) %}

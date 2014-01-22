@@ -1,0 +1,10 @@
+/var/log/cherokee/*.error /var/log/cherokee/*.access /var/log/cherokee.access /var/log/cherokee.error {
+  rotate 7
+  weekly
+  compress
+  missingok
+  notifempty
+  postrotate
+	/usr/bin/killall -SIGUSR2 cherokee
+  endscript
+}
